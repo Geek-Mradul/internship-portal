@@ -7,6 +7,7 @@ const auth = require('./middleware/auth');
 const internshipRoutes = require('./routes/internshipRoutes');
 const studentRoutes = require('./routes/studentRoutes');
 const app = express();
+const applicationRoutes = require('./routes/applicationRoutes');
 app.use(cors());
 app.use(express.json());
 
@@ -32,6 +33,7 @@ app.get('/api/me', auth, (req, res) => {
 // ---------------------------------
 app.use('/api/internships', internshipRoutes);
 app.use('/api/student', studentRoutes);
+app.use('/api/apply', applicationRoutes);
 
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => console.log(`Server started on port ${PORT}`));

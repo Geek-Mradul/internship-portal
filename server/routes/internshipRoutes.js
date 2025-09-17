@@ -7,5 +7,6 @@ const { isCompany } = require('../middleware/checkRole');
 
 // POST /api/internships - Create a new internship
 router.post('/', auth, isCompany, internshipController.createInternship);
-
+// GET /api/internships - Get all internships (public)
+router.get('/', internshipController.getAllInternships);
 module.exports = router;

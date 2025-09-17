@@ -36,3 +36,17 @@ exports.createInternship = async (req, res) => {
         res.status(500).json({ error: 'Server error creating internship' });
     }
 };
+exports.getAllInternships = async (req, res) => {
+    try {
+        const result = await db.query(
+            `SELECT i.id, i.role, i.stipend, i.duration, c.company_name 
+       FROM internships i 
+       JOIN companies c ON i.company_id = c.id
+       ORDER BY i.created_at DESC`
+        );
+        res.status(200).json(result.rows);
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ error: 'Server error fetching internships' });
+    }
+};
