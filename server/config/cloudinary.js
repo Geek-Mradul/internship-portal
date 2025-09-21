@@ -13,7 +13,8 @@ const storage = new CloudinaryStorage({
     params: {
         folder: 'resumes', // Folder name in Cloudinary
         allowed_formats: ['pdf', 'doc', 'docx'],
-        upload_preset: 'internship_resumes'
+        upload_preset: 'internship_resumes',
+        resource_type: 'auto'
     },
 });
 

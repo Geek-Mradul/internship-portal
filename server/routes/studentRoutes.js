@@ -6,9 +6,14 @@ const { storage } = require('../config/cloudinary');
 const upload = multer({ storage });
 const auth = require('../middleware/auth');
 const db = require('../db');
+const studentController = require('../controllers/studentController');
+const { isStudent } = require('../middleware/checkRole');
 
-// This route will handle the resume upload and update the user's record
-router.post('/resume', auth, upload.single('resume'), async (req, res) => {
+// GET /api/student/profile - Get the logged-in student's profile data
+router.get('/profile', auth, isStudent, studentController.getStudentProfile);
+
+// POST /api/student/resume - Handle the upload of a new resume
+router.post('/resume', auth, isStudent, upload.single('resume'), async (req, res) => {
     try {
         if (!req.file) {
             return res.status(400).json({ error: 'No file uploaded.' });
